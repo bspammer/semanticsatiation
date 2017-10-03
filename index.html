@@ -1,0 +1,53 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="content/index.css" />
+</head>
+<body>
+    <audio id="player"></audio>
+    <audio id="altplayer"></audio>
+
+    <img class="preload" src="https://i.imgur.com/1n7gTZb.png" />
+    <img class="preload" src="https://i.imgur.com/8OGV9Zb.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.core.min.js"></script>
+
+    <!--<script src="http://livejs.com/live.js"></script>-->
+    <script>
+        var sound = new Howl({
+            src: ["content/sound.mp3"]
+        });
+        var altsound = new Howl({
+            src: ["content/altsound.mp3"]
+        });
+        var imgurl = "https://i.imgur.com/1n7gTZb.png";
+        var altimgurl = "https://i.imgur.com/8OGV9Zb.png";
+        var backgroundurl = "";
+
+        var form = document.getElementById("input_form");
+        var player = document.getElementById("player");
+        var audioFile = document.getElementById("audio_file");
+        var audioFileAlt = document.getElementById("audio_file_alt");
+        document.body.addEventListener("click", function(e) {
+            lul = e;
+            if (e.target != this && e.target.tagName !== "IMG") {
+                return;
+            }
+            var image = document.createElement("img");
+            image.src = imgurl;
+            var playSound = sound;
+            <!--if (Math.random() < 0.1) {-->
+                <!--image.src = altimgurl;-->
+                <!--playSound = altsound;-->
+            <!--}-->
+            var xPos = e.x - image.width/2;
+            var yPos = e.y - image.height/2;
+
+            image.style.position = "absolute";
+            image.style.left = xPos;
+            image.style.top = yPos;
+            image.draggable = false;
+            document.body.appendChild(image);
+            playSound.play();
+        });
+    </script>
+</body>
+</html>
